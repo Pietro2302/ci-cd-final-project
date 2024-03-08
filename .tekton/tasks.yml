@@ -4,10 +4,9 @@ kind: Task
 metadata:
   name: cleanup
 spec:
-  description: This task will clean up a workspace by deleting all of the files
+  description: This task will clean up a workspace by deleting all the files.
   workspaces:
-  - name : source
-
+    - name: source
   steps:
     - name: remove
       image: alpine:3
@@ -33,7 +32,8 @@ spec:
             rm -rf "${WORKSPACE_SOURCE_PATH}"/.[!.]*
             # Delete files and directories starting with .. plus any other character
             rm -rf "${WORKSPACE_SOURCE_PATH}"/..?*
-          fi
+           fi
+
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
@@ -55,5 +55,5 @@ spec:
           #!/bin/bash
           set -e
           python -m pip install --upgrade pip wheel
-          pip install -r ci-cd-final-project/requirements.txt
+          pip install -r requirements.txt
           nosetests $(params.args)
